@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://classmate-xiaoming.github.io</id>
     <title>小明同学的博客</title>
-    <updated>2020-12-10T03:53:07.715Z</updated>
+    <updated>2020-12-10T09:26:27.693Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://classmate-xiaoming.github.io"/>
     <link rel="self" href="https://classmate-xiaoming.github.io/atom.xml"/>
@@ -16,8 +16,7 @@
         <link href="https://classmate-xiaoming.github.io/post/transformer-jie-shao-ge-ren-li-jie/">
         </link>
         <updated>2020-12-10T01:45:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="transformer介绍个人理解">Transformer介绍（个人理解）</h1>
-<h2 id="前言">前言</h2>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
 <p>在阅读了谷歌attention is all you need和一篇很棒的解释文章后对transformer应用注意力机制有了一定的理解，利用注意力机制代替传统的RNN模型更好的利用了上下文的信息。</p>
 <p>文章链接：</p>
 <p><a href="https://jalammar.github.io/illustrated-transformer/"><strong>The Illustrated Transformer</strong></a></p>
@@ -25,24 +24,24 @@
 <p><a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html">Transformer: A Novel Neural Network Architecture for Language Understanding</a></p>
 <h2 id="模型简介">模型简介</h2>
 <img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210115056.png" referrerpolicy="no-referrer" style="margin: auto;" />
-模型采用经典的编码器-解码器结构。
+<p>模型采用经典的编码器-解码器结构。</p>
 <h3 id="编码器">编码器</h3>
 <p>编码器首先流入一个self-attention层，该层帮助每个单词获得其前后单词的信息，再将attention层的输出输入一个前向神经网络中，并在每层之间引入残差连接来稳定梯度。</p>
 <h3 id="解码器">解码器</h3>
 <p>解码器的构成与编码器类似，同样采用了self-attention层和前向神经网络层，但在中间加入了一层获取编码器信息的attention层，与seq2seq模型中注意力机制类似，让解码器可以关注到每层编码器的信息，而不只是编码器最后的输出。</p>
 <h2 id="向量化">向量化</h2>
 <p>在输入时transformer采用和大部分NLP应用同样的方式采用embedding将单词转化为词向量，输入到编码器中，在本文中采用的为512维的词向量，为了保证进行残差计算，编码器输出的维度都维持在512维。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210100643.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210170725.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>在self-attention层时，每个单词的路径是两两相关的，在前向网络时每个路径则没有相关的依赖，这样保证这些路径可以并行执行。</p>
 <h2 id="self-attention">Self-Attention</h2>
 <p>self-attention是整个transfromer模型最关键的部分，self-attention对之前的attention机制的变种，加入了多头机制和缩放因子。</p>
 <h3 id="self-attention作用">Self-Attention作用</h3>
 <p>Self-Attention帮助模型更好的联系上下文，在机器翻译中，如果要翻译“The animal didn’t cross the street because it was too tired”。句子中&quot;it&quot;指的是什么呢？“it&quot;指的是&quot;street” 还是“animal”？对人来说很简单的问题，但是对算法而言并不简单。</p>
 <p>当处理单词“it”时，self-attention会将将“it”和“animal”联系起来，把相关词的理解编码到当前词之中。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210100726.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210170821.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <h3 id="self-attention计算过程">Self-Attention计算过程</h3>
 <p><strong>第一步</strong>，计算对应的query/key/value 矩阵，将所有的输入词向量合并为矩阵X，并将其分别乘以权重矩阵</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210100749.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171128.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p><u>个人理解：attention机制利用query矩阵去检索所需要部分的信息，通过点积的方式和key矩阵进行匹配，找到相关性更高的key并利用key-value键值对找到所需的value，来完成注意力机制。</u></p>
 <p>**第二步：**Q矩阵点乘K矩阵的转置得到匹配后的矩阵，**此处Self-Attention引入了缩放因子，点积后的矩阵除以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><msub><mi>d</mi><mi>k</mi></msub></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{d_k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.18278000000000005em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.85722em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.81722em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
 -10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
@@ -51,36 +50,35 @@
 -221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
 s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
 s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.18278000000000005em;"><span></span></span></span></span></span></span></span></span>,来使梯度更加稳定，通过softmax操作归一化表示对应词的相关程度，**再用得到的矩阵点乘V矩阵得到每个词的Value。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101026.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171244.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <h3 id="self-attention多头机制">Self-Attention多头机制</h3>
 <p>如果只采用一组query/key/value矩阵最后得到的结果一般都会更关注所处理的词本身，如输入“apple tree”时，apple和tree对应的输出z都会更多取自自身的value，为解决上述问题，Self-Attention引入了<strong>多头机制</strong>来解决问题。</p>
 <p><strong>多头机制</strong>使用多组query/key/value矩阵（文中使用八组），每一组进行随机的初始化。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101108.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171321.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>文中使用八组矩阵，得到不同的八个输出z值矩阵，实现了每个z值矩阵关注句子的不同部分并根据相关性确定各个部分的value，实现了对上下文的有效利用。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101147.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171359.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>但是前向神经网络不能直接接收八个矩阵，而是希望接收一个矩阵，所以需要将八个矩阵合并为一个矩阵</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101223.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171439.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>在加入多头机制时，可以看到进行翻译后“it”集中于“the animal”和“tired”上，可见模型集中了两者的信息，对“it”进行合成处理。</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101309.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171514.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <h3 id="位置编码">位置编码</h3>
 <p>可以注意到，再利用attention方法时，我们虽然很好的获取了处理单词的上下文信息但是我们忽略了文本的位置信息，为了利用位置信息我们对embedding的词向量加上位置编码来提供词向量间的距离。</p>
 <p>以四维向量为例的位置编码：</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101357.png" style="margin: auto;" />
-<p>在文中采用的向量是512维，位置向量也对应为512维，每个值都在【-1，1】间，利用涂色可视化：</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101433.png" style="margin: auto;" />
+<p><img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171554.png" referrerpolicy="no-referrer" style="margin: auto;" />在文中采用的向量是512维，位置向量也对应为512维，每个值都在【-1，1】间，利用涂色可视化：</p>
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210171846.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>可以看到位置编码具有一定的周期性，本文采用的位置编码公式如下：</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101644.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210172026.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>公式的设计十分巧妙，利用了三角函数的周期性，建模了词之间的位置关系，好过直接利用词的绝对位置的方式，修补了其只能建模有限长度的序列的缺点，同时利用了三角函数的值域为【-1，1】，可以很好的配合embedding的向量。</p>
 <h2 id="残差">残差</h2>
 <p>编码器和解码器在每个子层中都有残差连接并紧跟着layer-normalization，加快模型收敛，具体过程如下：</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101723.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210172119.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <h2 id="解码器-2">解码器</h2>
 <p>每个解码器模块接收编码器输出的K和V矩阵，作为中间的“encoder-decoder attention”层的输入，所进行的过程如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://classmate-xiaoming.github.io/post-images/1607568276895.gif" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://classmate-xiaoming.github.io/post-images/1607592223248.gif" alt="" loading="lazy"></figure>
 <p>解码器部分的·self-attention层预编码器中的不同，因为编码器部分只会关注早于当前位置的输出，得到的输出作为Q矩阵输入到“encoder-decoder attention”层，接收编码器的输出K,V矩阵作为K,V矩阵。</p>
 <h2 id="优化算法">优化算法</h2>
 <p>在训练时采用了Adam方法，本文利用了一种较warm up的学习率调节方式，公示如下图：</p>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101918.png" style="margin: auto;" />
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210172207.png" referrerpolicy="no-referrer" style="margin: auto;" />
 <p>采用一个warmup-steps的超参，在训练刚开始进行时，第二项决定学习率，此时学习率上升，当训练进行到一定程度时，第一项决定学习率，学习率开始下降，这样先上升再下降的学习率有利于让模型快速收敛。</p>
 <h2 id="正则化方法">正则化方法</h2>
 <p>模型也采用了两种正则化方法，一种是经典的dropout方法，另一个是label smoothing方法，也就是在训练计算交叉熵时，不再使用one-hot向量而是将0处也填充上一个非0的极小值，可以一定程度上解决exposure bias的问题，增加模型的鲁棒性。</p>
