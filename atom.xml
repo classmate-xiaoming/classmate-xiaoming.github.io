@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://classmate-xiaoming.github.io</id>
     <title>小明同学的博客</title>
-    <updated>2020-12-10T09:26:27.693Z</updated>
+    <updated>2020-12-10T12:36:14.203Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://classmate-xiaoming.github.io"/>
     <link rel="self" href="https://classmate-xiaoming.github.io/atom.xml"/>
@@ -10,6 +10,39 @@
     <logo>https://classmate-xiaoming.github.io/images/avatar.png</logo>
     <icon>https://classmate-xiaoming.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 小明同学的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[搞定Gridea+github+Typora+PicGo+CSDN中踩的坑]]></title>
+        <id>https://classmate-xiaoming.github.io/post/gao-ding-grideagithubtyporapicgocsdn-zhong-cai-de-keng/</id>
+        <link href="https://classmate-xiaoming.github.io/post/gao-ding-grideagithubtyporapicgocsdn-zhong-cai-de-keng/">
+        </link>
+        <updated>2020-12-10T12:34:22.000Z</updated>
+        <content type="html"><![CDATA[<p>作为小白刚开始写博客，想要利用github的gitpages和图床来完成博客，中途遇见的坑记录一下各位出现类似的问题能帮到大家是最好的。</p>
+<h2 id="1利用gridea">1.利用Gridea</h2>
+<img src="https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210173835.png" referrerpolicy="no-referrer" style="margin: auto;" />
+<p>Gridea作为一个静态博客写作客户端，操作相较于其它的方式要简单很多，而且有许多可以直接利用的博客背景，但要注意：<strong>Gridea选取的库一定不要建立在你图床选取的库下面，这样会导致你的Gridea在更新你博客对应的库文件时清除了图床中存储的数据，导致你存储在图床的图片失效</strong></p>
+<p>具体的建立步骤就不再赘述，可以参考博客：<a href="https://www.cnblogs.com/6b7b5fc3/p/12716218.html"><strong>Github Pages+Gridea搭建个人博客</strong></a></p>
+<h2 id="2github上传后的图片不显示">2.Github上传后的图片不显示</h2>
+<p>配置Typora和图床的具体内容可以参考博客：<a href="https://zhuanlan.zhihu.com/p/141445396">Markdown文档写作利器套装：Typora+PicGo+GitHub</a></p>
+<p><u>一定注意要选择和博客不同的库作为图床！</u></p>
+<p>在配置了图床后，会发现上传到图床上的图片在Typora中没有显示，显示图片加载失败。</p>
+<p>解决方案：</p>
+<p><strong>打开文件 C:/Windows/System32/drivers/etc/hosts</strong></p>
+<p><strong>在末尾添加：</strong></p>
+<p><code>\#GitHub Start 192.30.253.112 Build software better, together 192.30.253.119 gist.github.com 151.101.184.133 assets-cdn.github.com 151.101.184.133 raw.githubusercontent.com 151.101.184.133 gist.githubusercontent.com 151.101.184.133 cloud.githubusercontent.com 151.101.184.133 camo.githubusercontent.com 151.101.184.133 avatars0.githubusercontent.com 151.101.184.133 avatars1.githubusercontent.com 151.101.184.133 avatars2.githubusercontent.com 151.101.184.133 avatars3.githubusercontent.com 151.101.184.133 avatars4.githubusercontent.com 151.101.184.133 avatars5.githubusercontent.com 151.101.184.133 avatars6.githubusercontent.com 151.101.184.133 avatars7.githubusercontent.com 151.101.184.133 avatars8.githubusercontent.com \#GitHub End</code></p>
+<h3 id="3typora写好的代码上传csdn图片不显示">3.Typora写好的代码上传CSDN图片不显示</h3>
+<p>系统显示外链图片转存失败，解决方案：</p>
+<p>Typora自带的格式为：</p>
+<p><code>[图片名称](https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210180411.png)</code></p>
+<p>将其转化为html格式：</p>
+<p><code>&lt;img src=&quot;https://raw.githubusercontent.com/classmate-xiaoming/img/master/img/20201210180411.png&quot; referrerpolicy=&quot;no-referrer&quot; style=&quot;margin: auto;&quot; /&gt;</code></p>
+<p>转换格式后CSDN即可正确显示图片，同时这个格式也可以解决下一个问题</p>
+<h2 id="4gridea预览正常的博客在网页上图片无法显示">4.Gridea预览正常的博客在网页上图片无法显示</h2>
+<p>在Gridea上预览没有问题，但同步后在网页上出现问题，图片无法显示，解决方案：</p>
+<p>图片部分选择html格式的markdown，并且加入 <strong>referrerpolicy=&quot;no-referrer&quot;</strong>：</p>
+<p><code>&lt;img src=&quot;&quot; referrerpolicy=&quot;no-referrer&quot; style=&quot;margin: auto;&quot; /&gt;</code></p>
+<p>再同步后在博客上便可以正常显示。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Transformer介绍（个人理解）]]></title>
         <id>https://classmate-xiaoming.github.io/post/transformer-jie-shao-ge-ren-li-jie/</id>
