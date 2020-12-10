@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Transformer介绍（个人理解） | 小明同学的博客</title>
-<link rel="shortcut icon" href="https://classmate-xiaoming.github.io/favicon.ico?v=1607569190529">
+<link rel="shortcut icon" href="https://classmate-xiaoming.github.io/favicon.ico?v=1607569903261">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://classmate-xiaoming.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Transformer介绍（个人理解） | 小明同学的博客 - Atom Feed" href="https://classmate-xiaoming.github.io/atom.xml">
@@ -23,7 +23,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://classmate-xiaoming.github.io">
-  <img class="avatar" src="https://classmate-xiaoming.github.io/images/avatar.png?v=1607569190529" alt="">
+  <img class="avatar" src="https://classmate-xiaoming.github.io/images/avatar.png?v=1607569903261" alt="">
   </a>
   <h1 class="site-title">
     小明同学的博客
@@ -112,7 +112,7 @@
 <p><a href="https://arxiv.org/abs/1706.03762"><strong>Attention Is All You Need</strong></a></p>
 <p><a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html">Transformer: A Novel Neural Network Architecture for Language Understanding</a></p>
 <h2 id="模型简介">模型简介</h2>
-<img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210100523.png" style="margin: auto;" />
+<figure data-type="image" tabindex="1"><img src="file:/https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210100523.png" alt="" loading="lazy"></figure>
 <p>模型采用经典的编码器-解码器结构。</p>
 <h3 id="编码器">编码器</h3>
 <p>编码器首先流入一个self-attention层，该层帮助每个单词获得其前后单词的信息，再将attention层的输出输入一个前向神经网络中，并在每层之间引入残差连接来稳定梯度。</p>
@@ -164,7 +164,7 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
 <img src="https://raw.githubusercontent.com/classmate-xiaoming/classmate-xiaoming.github.io/master/img/20201210101723.png" style="margin: auto;" />
 <h2 id="解码器-2">解码器</h2>
 <p>每个解码器模块接收编码器输出的K和V矩阵，作为中间的“encoder-decoder attention”层的输入，所进行的过程如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://classmate-xiaoming.github.io/post-images/1607568276895.gif" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://classmate-xiaoming.github.io/post-images/1607568276895.gif" alt="" loading="lazy"></figure>
 <p>解码器部分的·self-attention层预编码器中的不同，因为编码器部分只会关注早于当前位置的输出，得到的输出作为Q矩阵输入到“encoder-decoder attention”层，接收编码器的输出K,V矩阵作为K,V矩阵。</p>
 <h2 id="优化算法">优化算法</h2>
 <p>在训练时采用了Adam方法，本文利用了一种较warm up的学习率调节方式，公示如下图：</p>
